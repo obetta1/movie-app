@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "881933589584",
+    "project_id": "movi-app-7d1ff",
+    "storage_bucket": "movi-app-7d1ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881933589584:android:40d5c43317f410e17e0555",
+        "android_client_info": {
+          "package_name": "com.example.movi_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARwecb87_8eHcmnFGdzBXcF7XLH50WG8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
