@@ -13,8 +13,9 @@ import '../services/storage_services.dart';
 
 Future<void> addMovies(BuildContext context) async{
   final MovieController movieController = Get.find();
-  final _nameController = TextEditingController();
-  final _directorController = TextEditingController();
+  final nameController = TextEditingController();
+  final movieIdController = TextEditingController();
+  final directorController = TextEditingController();
 
   ///display a bottomsheet modal to add movie  fields
   await showModalBottomSheet(
@@ -45,39 +46,36 @@ Future<void> addMovies(BuildContext context) async{
                           Image.network(movieController.newMovie['imageUrl'],fit: BoxFit.cover, ):
                       Column(
                         children: [
-                          const Icon(Icons.image_outlined, size: 150,),
+                          const Icon(Icons.image_outlined, size: 140,),
                           CustomText.blackBodyText('upload movie poster')
                         ],
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                CustomInputfield(label: 'movie name', controller: _nameController),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomInputfield(label: 'movie Director', controller: _directorController),
-                const SizedBox(
-                  height: 10,
-                ),
+
+                  CustomInputfield(label: 'movie id', controller: movieIdController),
+
+                CustomInputfield(label: 'movie name', controller: nameController),
+
+                CustomInputfield(label: 'movie Director', controller: directorController),
+
                 //this is used to add the movie to the firebase backend
                 ElevatedButton(
                   child: const Text('Add a movie'),
                   onPressed: () async{
-                    final String name = _nameController.text;
-                    final String  director = _directorController.text;
-                    if( name.isNotEmpty && director.isNotEmpty){
+                    final String name = nameController.text;
+                    final String  director = directorController.text;
+                    if( name.isNotEmpty && director.isNotEmpty && movieIdController.text.isNotEmpty){
                       ///this add a new movie to the firebase database
                       movieController.addMovie(
                           Movies(
+                            id: movieIdController.text,
                               name: name,
                               director: director,
                               imageUrl: movieController.newMovie['imageUrl']));
-                      _nameController.text = " ";
-                      _directorController.text = " ";
+                      nameController.clear();
+                      directorController.clear();
                       Navigator.of(context).pop();
                     }
                   },

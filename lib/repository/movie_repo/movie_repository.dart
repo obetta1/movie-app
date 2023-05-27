@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movi_app/model/movies.dart';
-import 'package:movi_app/repository/base_movie_repository.dart';
+import 'package:movi_app/repository/movie_repo/base_movie_repository.dart';
 
 class MovieRepository extends BaseMovieRepository{
   final FirebaseFirestore _firebaseFirestore;

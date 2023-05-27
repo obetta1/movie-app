@@ -1,4 +1,4 @@
-import '../model/movies.dart';
+import '../../model/movies.dart';
 
 abstract class BaseMovieRepository{
   Stream<Movies> getMovie(String movieId);

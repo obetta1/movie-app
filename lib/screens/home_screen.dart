@@ -9,7 +9,7 @@ import '../widgets/movie_poster_card.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({Key? key}) : super(key: key);
-  final CollectionReference _movieDetails = FirebaseFirestore.instance.collection('movies');
+
    final MovieController movieController = Get.put(MovieController());
    final AuthController auth = Get.put(AuthController());
 
@@ -30,17 +30,15 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       body: StreamBuilder(
-          stream: _movieDetails.snapshots(),
+          stream:movieController.movieSnapShot.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
     if(streamSnapshot.hasData) {
       return ListView.builder(
           itemCount: movieController.movies.length,
           itemBuilder: (context, index) {
             var documentId = streamSnapshot.data!.docs[index].id;
-            final DocumentSnapshot documentSnapshot = streamSnapshot.data!
-                .docs[index];
             return MovieCard(
-              documentSnapshot: documentSnapshot,
+              documentId: documentId,
               movies: movieController.movies[index],
             );
           });

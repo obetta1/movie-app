@@ -8,12 +8,14 @@ import '../model/movies.dart';
 import 'widget.dart';
 
 class MovieCard extends StatelessWidget {
-   MovieCard({
-    Key? key,
-    this.movies, required this.documentSnapshot,
+
+  const MovieCard({
+    Key? key, this.movies, required this.documentId,
+
   }) : super(key: key);
   final Movies? movies;
-  final DocumentSnapshot documentSnapshot;
+  final String documentId;
+
 
 
 
@@ -51,25 +53,33 @@ class MovieCard extends StatelessWidget {
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children:[
-                          CustomText.headLine(movies!.name),
-                          IconButton(
-                              tooltip: 'delete movie',
-                              onPressed: ()=>_deleteMovie(context, documentSnapshot),
-                              icon: Icon(Icons.delete, color: Colors.redAccent, size: 40,)
-                          ),
-                        ] ),
+                    child:Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children:[
+                              CustomText.headLine(movies!.name),
+                              IconButton(
+                                  tooltip: 'delete movie',
+                                  onPressed: ()=>_deleteMovie(context,  movies!, documentId),
+                                  icon: Icon(Icons.delete, color: Colors.redAccent, size: 40,)
+                              ),
+                            ] ),
+                        CustomText.whiteText('Directed by: ${movies!.director}')
+                      ],
+                    ),
                   ),
                 ),
+
               ],
             )),
       ),
     );
   }
 
-  void _deleteMovie(BuildContext context, DocumentSnapshot documentSnapshot){
+  void _deleteMovie(BuildContext context, Movies movies, String documentId){
+    final MovieController movieController = Get.find();
     showDialog(
         context: context,
         builder: (BuildContext context){
@@ -81,7 +91,7 @@ class MovieCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text('are you sure you want to delete '),
-                  Text('${documentSnapshot['name']}',
+                  Text('${movies.name}',
                     style: const TextStyle( fontWeight: FontWeight.bold),)
                 ]),
             actions: <Widget>[
@@ -91,7 +101,7 @@ class MovieCard extends StatelessWidget {
               ),
               TextButton(
                   onPressed: () {
-                    //_deleteUser(documentSnapshot.id);
+                    movieController.deleteMovie(documentId);
                     Navigator.pop(context, 'OK', );
                   },
                   child: const Text('OK', style: TextStyle(

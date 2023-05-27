@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:movi_app/repository/auth_repository.dart';
-import 'package:movi_app/repository/movie_repository.dart';
+import 'package:movi_app/repository/aut_repo/auth_repository.dart';
+import 'package:movi_app/repository/movie_repo/movie_repository.dart';
 import 'package:movi_app/screens/login_screen.dart';
 
 import '../screens/screens.dart';
