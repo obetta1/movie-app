@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movi_app/controller/auth_controller.dart';
+import 'package:movi_app/screens/home_screen.dart';
+import 'package:movi_app/screens/login_screen.dart';
+import 'package:movi_app/ui_helper/ui_helper.dart';
+import 'package:movi_app/utils/validation.dart';
 import 'package:movi_app/widgets/custom_imput_field.dart';
+import 'package:movi_app/widgets/custom_richtext.dart';
 
 import '../widgets/widget.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+   SignUpScreen({Key? key}) : super(key: key);
+  final AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
     var wSize = MediaQuery.of(context).size.width;
     var hSize = MediaQuery.of(context).size.height;
     final TextEditingController fullName = TextEditingController();
-    final TextEditingController address = TextEditingController();
+    final TextEditingController email = TextEditingController();
     final TextEditingController city = TextEditingController();
-    final TextEditingController country = TextEditingController();
-    final TextEditingController zipcode = TextEditingController();
+    final TextEditingController password = TextEditingController();
+    final TextEditingController confirmPassword = TextEditingController();
 
     List images = [
       'g.png',
@@ -59,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
                 height: 10,
               ),
               CustomInputfield(
-                controller: address,
+                controller: email,
                 label: 'email address',
                 icon: Icons.email_rounded,
               ),
@@ -74,7 +82,7 @@ class SignUpScreen extends StatelessWidget {
                 height: 10,
               ),
               CustomInputfield(
-                controller: country,
+                controller: password,
                 label: 'password',
                 icon: Icons.password_rounded,
               ),
@@ -82,20 +90,26 @@ class SignUpScreen extends StatelessWidget {
                 height: 10,
               ),
               CustomInputfield(
-                  controller: zipcode,
-                  label: 'comfirm password',
+                  controller: confirmPassword,
+                  label: 'confirm password',
                   icon: Icons.password_rounded),
               const SizedBox(
                 height: 10,
               ),
 
-              CustomButton(label: 'Save' ,wSize: wSize, hSize: hSize, onTap: (){
-
+              CustomButton(label: 'Save' ,wSize: wSize, hSize: hSize, onTap: ()=>{
+                showSnackbar('Success', 'enter email and password'),
+                if(Validate.validateEmail(email.text) && Validate.validatePassword(password.text)){
+                authController.registerUser(email.text, password.text),
+                }
               }),
             ],
           ),
         ),
-
+          const SizedBox(
+            height: 10,
+          ),
+          CustomRichText(title: 'Already have an account?', spanText: 'Login here', onPressed: ()=> Get.to(LoginScreen())),
           const SizedBox(
             height: 20,
           ),

@@ -18,8 +18,8 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
-      child: GestureDetector(
-        onTap: () => onTap,
+      child: InkWell(
+        onTap: ()=>onTap(),
         child: Container(
           alignment: Alignment.center,
           width: wSize * 0.5,

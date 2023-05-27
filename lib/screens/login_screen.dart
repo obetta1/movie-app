@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movi_app/utils/validation.dart';
 import 'package:movi_app/widgets/custom_richtext.dart';
 
-import '../aut/auth_controller.dart';
+import '../controller/auth_controller.dart';
 import '../widgets/widget.dart';
 import 'screens.dart';
 
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
+   LoginScreen({super.key});
+  final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
@@ -51,12 +52,14 @@ class LoginScreen extends StatelessWidget {
                   CustomInputfield(controller: emailController, label: 'email', icon: Icons.email_rounded,),
                   CustomInputfield(controller: passwordController, label:  'password', icon:  Icons.password_rounded,),
                   SizedBox(height: 40,),
-                  CustomButton(wSize: wSize, hSize: hSize,label: 'Login', onTap: ()=>AuthController.instance
-                    .login(emailController.text, passwordController.text),),
+                  CustomButton(wSize: wSize, hSize: hSize,label: 'Login', onTap: (){
+                    if(Validate.validateEmail(emailController.text) && Validate.validatePassword(passwordController.text)) { authController.login(emailController.text, passwordController.text);
+                    }
+                  }),
                   const SizedBox(
                     height: 20,
                   ),
-                  CustomRichText(title: 'Don\'t have an account?', spanText: ' SignUP', onPressed: ()=>Get.to(const SignUpScreen()))
+                  CustomRichText(title: 'Don\'t have an account?', spanText: ' SignUP', onPressed: ()=>Get.to(SignUpScreen()))
                 ],
               ),
             ),

@@ -1,17 +1,21 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movi_app/controller/movie_controller.dart';
 
 import '../model/movies.dart';
 import 'widget.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({
+   MovieCard({
     Key? key,
     this.movies, required this.documentSnapshot,
   }) : super(key: key);
   final Movies? movies;
   final DocumentSnapshot documentSnapshot;
+
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movi_app/src/aut/auth_controller.dart';
-import 'package:movi_app/src/aut/firebase_options.dart';
+import 'package:movi_app/aut/firebase_options.dart';
 import 'package:movi_app/screens/home_screen.dart';
-import 'package:movi_app/src/screens/login_screen.dart';
+import 'package:movi_app/screens/screens.dart';
+
+
+import 'controller/auth_controller.dart';
 
 
 void main() async{
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
