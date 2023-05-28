@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
+
+
 import 'package:movi_app/repository/local_storage_repository.dart';
 import 'package:movi_app/repository/movie_repo/movie_repository.dart';
 

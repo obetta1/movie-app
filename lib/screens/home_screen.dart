@@ -18,6 +18,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Movies'),
+        automaticallyImplyLeading: false,
         actions: [
           TextButton(onPressed: ()=> auth.logoutUser(), child: const Text('Logout', style: TextStyle(
             color: Colors.white

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -23,15 +25,19 @@ class AuthController extends GetxController {
     //this help to notify the user instance
     _user.bindStream(auth.userChanges());
     // a listener that help monitor the use changes
+
     ever(_user, _initialScreen);
   }
 
   _initialScreen(User? user){
-    if(user == null){
-      Get.to(  LoginScreen());
-    }else{
-      Get.to( HomeScreen());
-    }
+    Timer(Duration(seconds: 3), () {
+      if(user == null){
+        Get.to(  LoginScreen());
+      }else{
+        Get.to( HomeScreen());
+      }
+    });
+
   }
 
   void login(String email, password) async{
