@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import 'package:movi_app/controller/auth_controller.dart';
 import 'package:movi_app/screens/home_screen.dart';
 import 'package:movi_app/screens/login_screen.dart';
-import 'package:movi_app/ui_helper/ui_helper.dart';
+
 import 'package:movi_app/utils/validation.dart';
 import 'package:movi_app/widgets/custom_imput_field.dart';
 import 'package:movi_app/widgets/custom_richtext.dart';
 
+import '../utils/ui_helper.dart';
 import '../widgets/widget.dart';
 
 class SignUpScreen extends StatelessWidget {

@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:movi_app/repository/aut_repo/baseAuth_repository.dart';
 
 import '../../screens/screens.dart';
-import '../../ui_helper/ui_helper.dart';
+import '../../utils/ui_helper.dart';
+
+
 
 class AuthRepository extends BaseAuthRepository{
   final auth.FirebaseAuth _firebaseAuth;

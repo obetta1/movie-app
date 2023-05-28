@@ -16,8 +16,8 @@ class LocalStorageRepository extends BaseLocalStorageRepository{
   }
 
   @override
-  Stream<List<Movies>> getMovieFromLocalStorage(Box box) {
-    return box.values.toList() as Stream<List<Movies>>;
+ List<Movies> getMovieFromLocalStorage(Box box)  {
+    return box.values.toList() as List<Movies>;
   }
 
   @override

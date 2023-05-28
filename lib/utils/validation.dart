@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movi_app/ui_helper/ui_helper.dart';
+import 'package:movi_app/utils/ui_helper.dart';
+
+
 
 class Validate{
   static bool validatePassword(String password,){

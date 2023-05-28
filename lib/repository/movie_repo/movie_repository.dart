@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive/hive.dart';
 import 'package:movi_app/model/movies.dart';
 import 'package:movi_app/repository/movie_repo/base_movie_repository.dart';
+
+import '../local_storage_repository.dart';
 
 class MovieRepository extends BaseMovieRepository{
   final FirebaseFirestore _firebaseFirestore;
   final CollectionReference _movieDetails = FirebaseFirestore.instance.collection('ben');
+  final LocalStorageRepository localStorageRepository = LocalStorageRepository();
 
   MovieRepository({FirebaseFirestore? firebaseFirestore})
       : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance;
@@ -17,9 +21,11 @@ class MovieRepository extends BaseMovieRepository{
   }
 
   @override
-  Stream<List<Movies>> getAllMovie() {
-   return _firebaseFirestore.collection('movies').snapshots().map((snap) {
+  Stream<List<Movies>> getAllMovie()  {
+   var movie = _firebaseFirestore.collection('movies').snapshots().map((snap) {
      return snap.docs.map((doc) => Movies.fromSnapshot(doc)).toList();});
+
+   return movie;
   }
 
   @override
