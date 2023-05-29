@@ -2,14 +2,15 @@
 import 'package:flutter/material.dart';
 
 class CustomInputfield extends StatelessWidget {
-  const CustomInputfield({
+   CustomInputfield({
     super.key,
-     required this.label, this.icon, required this.controller,
+     required this.label, this.icon, required this.controller, required this.validator,
   });
 
   final TextEditingController controller;
   final String label;
   final IconData? icon;
+   final FormFieldValidator validator;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class CustomInputfield extends StatelessWidget {
               )
             ]
         ),
-        child: TextField(
+        child: TextFormField(
           controller: controller,
           decoration: InputDecoration(
             label:  Text(label),
@@ -52,7 +53,9 @@ class CustomInputfield extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
             ),
+
           ),
+          validator:validator,
         ),
       ),
     );

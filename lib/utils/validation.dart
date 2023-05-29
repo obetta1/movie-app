@@ -1,26 +1,30 @@
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movi_app/utils/ui_helper.dart';
 
 
 
 class Validate{
-  static bool validatePassword(String password,){
+  static String? validatePassword(String password,){
     if( password.isEmpty || password.length < 6){
-      showSnackbar('Invalid password', "password must be more that 6 character");
-      return false;
+      return 'password must be more that 6 character';
     } else{
-      return true;
-    };
+      return null;
+    }
   }
 
-  static bool validateEmail(String email,){
+  static String? validateEmail(String email,){
     if( email.isNotEmpty && email.isEmail){
-      return true;
+      return  null;
     } else{
-      showSnackbar('Invalid password', "password must be more that 6 character");
-      return false;
-    };
+      return '* invalid email';
+    }
+  }
+
+  static String? validateField(String email,){
+    if( email.isEmpty){
+      return '* Field is required';
+    } else{
+      return null;
+    }
   }
 }

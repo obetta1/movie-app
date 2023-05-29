@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movi_app/widgets/custom_text.dart';
 import '../controller/auth_controller.dart';
 import '../controller/movie_controller.dart';
 import '../utils/ui_helper.dart';
@@ -17,23 +18,37 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Movies'),
-        automaticallyImplyLeading: false,
-        actions: [
-          TextButton(
-              onPressed: () => auth.logoutUser(),
-              child: const Text(
-                'Logout',
-                style: TextStyle(color: Colors.white),
-              ))
-        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.redAccent,
+              ),
+              child: Image.asset('assets/images/logo.png'),
+            ),
+            ListTile(
+              title:  CustomText.blackBodyText('Logout'),
+              onTap: () {
+                showLogoutDialog(context);
+              },
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: 'Add a movie',
           child: const Icon(Icons.add), onPressed: () => addMovies(context)),
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       body: StreamBuilder(
           stream: movieController.movieSnapShot.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (streamSnapshot.hasData) {
+              movieController.addMovieToLocal();
+              movieController.getMoviesFromLocaCach();
               return Obx(
                 () => ListView.builder(
                     itemCount: movieController.localMovies.length,

@@ -25,7 +25,8 @@ class MovieController extends GetxController{
 
   void addMovieToLocal()async{
     Box box = await localStorageRepository.open();
-      movies.forEach((element) {localStorageRepository.addMovieToLocalStorage(box, element); });
+    await box.clear();
+      for (var element in movies) {localStorageRepository.addMovieToLocalStorage(box, element); }
   }
   void getMoviesFromLocaCach() async{
     Box box = await localStorageRepository.open();
