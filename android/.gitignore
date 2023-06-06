@@ -13,4 +13,4 @@ key.properties
 **/*.jks
 
 #env variables
-lib/aut/firebase_options.dart
+/lib/aut/firebase_options.dart
