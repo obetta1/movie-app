@@ -11,6 +11,3 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
-
-#env variables
-/lib/aut/firebase_options.dart
