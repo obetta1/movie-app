@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movi_app/screens/screens.dart';
 import 'package:movi_app/widgets/custom_text.dart';
+
 import '../controller/auth_controller.dart';
 import '../controller/movie_controller.dart';
 import '../utils/ui_helper.dart';
@@ -18,6 +20,13 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Movies'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.to(const MapScreen());
+              },
+              child: Text('Map'))
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -31,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               child: Image.asset('assets/images/logo.png'),
             ),
             ListTile(
-              title:  CustomText.blackBodyText('Logout'),
+              title: CustomText.blackBodyText('Logout'),
               onTap: () {
                 showLogoutDialog(context);
               },
@@ -40,8 +49,9 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        tooltip: 'Add a movie',
-          child: const Icon(Icons.add), onPressed: () => addMovies(context)),
+          tooltip: 'Add a movie',
+          child: const Icon(Icons.add),
+          onPressed: () => addMovies(context)),
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       body: StreamBuilder(
           stream: movieController.movieSnapShot.snapshots(),
