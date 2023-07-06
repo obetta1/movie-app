@@ -4,18 +4,17 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movi_app/aut/firebase_options.dart';
 import 'package:movi_app/model/movies.dart';
-import 'package:movi_app/repository/local_storage_repository.dart';
 import 'package:movi_app/screens/screens.dart';
-
+import 'package:workmanager/workmanager.dart';
 
 import 'controller/auth_controller.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-   options: DefaultFirebaseOptions.currentPlatform
-  ).then((value) => Get.put(AuthController()));
+  Workmanager().initialize(callbackDispatcher);
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) => Get.put(AuthController()));
   await Hive.initFlutter();
   Hive.registerAdapter(MoviesAdapter());
   runApp(const MyApp());
@@ -31,8 +30,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const SplashScreen(),
+      home: HomeScreen(),
     );
   }
 }
 
+callbackDispatcher() {}

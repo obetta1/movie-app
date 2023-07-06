@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:movi_app/repository/aut_repo/auth_repository.dart';
-import 'package:movi_app/screens/login_screen.dart';
 
 import '../screens/screens.dart';
 
@@ -28,27 +26,25 @@ class AuthController extends GetxController {
     ever(_user, _initialScreen);
   }
 
-  _initialScreen(User? user){
+  _initialScreen(User? user) {
     Timer(Duration(seconds: 3), () {
-      if(user == null){
-        Get.to(  LoginScreen());
-      }else{
-        Get.to( HomeScreen());
+      if (user == null) {
+        Get.to(HomeScreen());
+      } else {
+        Get.to(HomeScreen());
       }
     });
-
   }
 
-  void login(String email, password) async{
-authRepository.loginWithEmailAndPassword(email: email, password: password);
-
+  void login(String email, password) async {
+    authRepository.loginWithEmailAndPassword(email: email, password: password);
   }
 
-  void registerUser(String email, password){
+  void registerUser(String email, password) {
     authRepository.signUp(email: email, password: password);
   }
 
-  void logoutUser(){
+  void logoutUser() {
     authRepository.logout();
   }
 }
